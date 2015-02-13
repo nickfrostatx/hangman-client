@@ -9,6 +9,7 @@ public class Game {
 
     public void move(int space) {
         this.spaces[space] = 1;
+        this.window.setSpaceColor(space, 1);
         System.out.println("Moved " + space);
     }
 }

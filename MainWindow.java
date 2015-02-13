@@ -111,6 +111,30 @@ public class MainWindow extends JFrame {
         this.setResizable(false);
         this.setVisible(true);
     }
+
+    public void setInputEnabled(boolean enabled) {
+        for (int i = 0; i < this.buttons.length; i++) {
+            if (this.buttons[i].getIcon() == this.white) {
+                this.buttons[i].setEnabled(enabled);
+            }
+        }
+    }
+
+    public void setSpaceColor(int space, int colorId) {
+        switch (colorId) {
+            case 0:
+                this.buttons[space].setIcon(this.white);
+                break;
+            case 1:
+                this.buttons[space].setIcon(this.green);
+                this.buttons[space].setEnabled(false);
+                break;
+            case 2:
+                this.buttons[space].setIcon(this.red);
+                this.buttons[space].setEnabled(false);
+                break;
+        }
+    }
     
     public static void main(String[] args) {
         new MainWindow();
