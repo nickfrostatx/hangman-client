@@ -102,7 +102,7 @@ public class MainWindow extends JFrame {
         corePanel.add(boardPanel, BorderLayout.CENTER);
 
         this.add(corePanel, BorderLayout.CENTER);
-        
+
         this.pack();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
