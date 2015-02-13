@@ -11,5 +11,6 @@ public class Game {
         this.spaces[space] = 1;
         this.window.setSpaceColor(space, 1);
         this.window.setInputEnabled(false);
+        this.window.setTurnLabel("Their turn");
     }
 }

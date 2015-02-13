@@ -21,6 +21,7 @@ public class MainWindow extends JFrame {
     private ImageIcon white, grey, green, red;
     private Game game;
     private JButton[] buttons;
+    private JLabel turnLabel;
 
     public MainWindow() {
 
@@ -37,11 +38,11 @@ public class MainWindow extends JFrame {
         corePanel.setLayout(new BorderLayout());
         corePanel.setBackground(Color.WHITE);
 
-        final JLabel turn = new JLabel("Your turn");
+        this.turnLabel = new JLabel("Your turn");
 
         JPanel northPanel = new JPanel();
         northPanel.setBackground(Color.WHITE);
-        northPanel.add(turn);
+        northPanel.add(this.turnLabel);
         northPanel.add(Box.createVerticalStrut(40));
 
         corePanel.add(northPanel, BorderLayout.NORTH);
@@ -131,6 +132,10 @@ public class MainWindow extends JFrame {
                 this.buttons[space].setEnabled(false);
                 break;
         }
+    }
+
+    public void setTurnLabel(String text) {
+        this.turnLabel.setText(text);
     }
     
     public static void main(String[] args) {
