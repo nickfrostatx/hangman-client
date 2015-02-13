@@ -1,8 +1,13 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,105 +16,68 @@ import javax.swing.SwingConstants;
 
 public class MainWindow extends JFrame {
     
-    private int remainingGuesses;
-    private String wrongGuesses;
-    private String word;
-    private String visible;
+    private ImageIcon white, grey, green, red;
+    private Game game;
 
-    public MainWindow(String toGuess) {
-        remainingGuesses = 10;
-        wrongGuesses = "";
-        word = toGuess;
+    public MainWindow() {
 
-        visible = "";
+        this.game = new Game(this);
 
-        for(int i = 0; i < word.length(); ++i) {
-            visible += "_ ";
-        }
+        this.white = new ImageIcon("white.png");
+        this.grey = new ImageIcon("grey.png");
+        this.green = new ImageIcon("green.png");
+        this.red = new ImageIcon("red.png");
+
+        this.setBackground(Color.WHITE);
 
         JPanel corePanel = new JPanel();
         corePanel.setLayout(new BorderLayout());
-        
-        final JLabel status = new JLabel("You have "+remainingGuesses+" remaining", SwingConstants.CENTER);
-        final JLabel wrong = new JLabel("Wrong guesses so far: "+wrongGuesses);
-        final JLabel visibleLabel = new JLabel(visible, SwingConstants.CENTER);
-        final JTextField input = new JTextField(); 
-        
-        JPanel southPanel = new JPanel(new GridLayout(4, 1));
-        southPanel.add(status);
-        southPanel.add(visibleLabel);
-        southPanel.add(input);
-        southPanel.add(wrong);
-        
-        corePanel.add(southPanel, BorderLayout.SOUTH);
-        
-        final HangmanFigure hf = new HangmanFigure();
-        corePanel.add(hf, BorderLayout.CENTER);
+
+        final JLabel turn = new JLabel("Your turn");
+
+        JPanel northPanel = new JPanel();
+        northPanel.add(turn);
+
+        corePanel.add(northPanel, BorderLayout.NORTH);
+
+        JPanel boardPanel = new JPanel(new GridLayout(3, 3, 8, 8));
+
+        final JButton[] buttons = new JButton[9];
+
+        for (int i = 0; i < 9; i++) {
+            final JButton btn = new JButton(this.white);
+            btn.setRolloverIcon(this.grey);
+            btn.setPressedIcon(this.white);
+            btn.setDisabledIcon(this.white);
+            btn.setBorder(null);
+            buttons[i] = btn;
+            btn.setActionCommand(Integer.toString(i));
+
+            if (i == 3) {
+                btn.setEnabled(false);
+            }
+
+            boardPanel.add(btn);
+
+            btn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    Object source = evt.getSource();
+                    if (source instanceof JButton) {
+                        String cmd = evt.getActionCommand();
+
+                        try {
+                            int space = Integer.parseInt(cmd);
+                            game.move(space);
+                        } catch (NumberFormatException e) {}
+
+                    }
+                }
+            });
+        }
+
+        corePanel.add(boardPanel, BorderLayout.CENTER);
 
         this.add(corePanel, BorderLayout.CENTER);
-        
-        input.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-                String text = input.getText();
-                
-                if(text.length()  == 1 && text.matches("[a-z]")) {
-                    
-                    boolean guessFound = false;
-                    
-                    for(int i = 0; i < word.length(); ++i) {
-                        if(text.charAt(0) == word.charAt(i)) {
-                            guessFound = true;
-                            
-                            String newVisible = "";
-                            for(int j = 0; j < visible.length(); ++j) {
-                                if(j == (i*2)) {
-                                    newVisible += word.charAt(i);
-                                }
-                                else {
-                                    newVisible += visible.charAt(j);
-                                }
-                            }
-                            visible = newVisible;
-                            visibleLabel.setText(visible);
-                        }
-                    }
-                    
-                    if(!guessFound) {
-                        if(--remainingGuesses >= 0) {
-                            status.setText("You have "+remainingGuesses+" guesses remaining");
-                            wrongGuesses += text+" ";
-                            wrong.setText("Wrong guesses so far: "+wrongGuesses);
-                            hf.set();
-                        }
-                        else {
-                            status.setText("You lost: the word was "+word);
-                            input.setEnabled(false);
-                        }
-                    }
-                    else {
-                        String actualVisible = "";
-                        for(int i = 0; i < visible.length(); i+=2) {
-                            actualVisible += visible.charAt(i);
-                        }
-                        
-                        if(actualVisible.equals(word)) {
-                            status.setText("Congratulations, you have won!");
-                            input.setEnabled(false);
-                        }
-                    }
-                    
-                }
-                else {
-                    System.out.println("Invalid input!");
-                }
-                
-                input.setText("");
-            }
-            
-        });
         
         this.pack();
         this.setLocationRelativeTo(null);
@@ -118,6 +86,6 @@ public class MainWindow extends JFrame {
     }
     
     public static void main(String[] args) {
-        new MainWindow("cat");
+        new MainWindow();
     }
 }
