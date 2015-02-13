@@ -28,10 +28,10 @@ public class MainWindow extends JFrame {
 
         this.spaces = new int[9];
 
-        this.white = new ImageIcon("white.png");
-        this.grey = new ImageIcon("grey.png");
-        this.green = new ImageIcon("green.png");
-        this.red = new ImageIcon("red.png");
+        this.white = new ImageIcon(getClass().getResource("/images/white.png"));
+        this.grey = new ImageIcon(getClass().getResource("/images/grey.png"));
+        this.green = new ImageIcon(getClass().getResource("/images/green.png"));
+        this.red = new ImageIcon(getClass().getResource("/images/red.png"));
 
         this.setBackground(Color.WHITE);
 
