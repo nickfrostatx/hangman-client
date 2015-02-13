@@ -22,10 +22,11 @@ public class MainWindow extends JFrame {
     private Game game;
     private JButton[] buttons;
     private JLabel turnLabel;
+    private int[] spaces;
 
-    public MainWindow() {
+    public MainWindow(Game game) {
 
-        this.game = new Game(this);
+        this.spaces = new int[9];
 
         this.white = new ImageIcon("white.png");
         this.grey = new ImageIcon("grey.png");
@@ -38,7 +39,7 @@ public class MainWindow extends JFrame {
         corePanel.setLayout(new BorderLayout());
         corePanel.setBackground(Color.WHITE);
 
-        this.turnLabel = new JLabel("Your turn");
+        this.turnLabel = new JLabel("Connecting");
 
         JPanel northPanel = new JPanel();
         northPanel.setBackground(Color.WHITE);
@@ -81,6 +82,7 @@ public class MainWindow extends JFrame {
             btn.setDisabledIcon(this.white);
             btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btn.setBorder(null);
+            btn.setEnabled(false);
             btn.setActionCommand(Integer.toString(i));
 
             this.buttons[i] = btn;
@@ -94,7 +96,11 @@ public class MainWindow extends JFrame {
                     try {
                         int space = Integer.parseInt(cmd);
                         game.move(space);
-                    } catch (NumberFormatException e) {}
+                    } catch (NumberFormatException e) {
+                        // Not a space
+                    } catch (Exception e) {
+                        setTurnLabel("Error communicating with server");
+                    }
                 }
             });
         }
@@ -110,9 +116,15 @@ public class MainWindow extends JFrame {
         this.setVisible(true);
     }
 
+    public void resetBoard() {
+        for (int i = 0; i < this.buttons.length; i++) {
+            this.setSpaceColor(i, 0);
+        }
+    }
+
     public void setInputEnabled(boolean enabled) {
         for (int i = 0; i < this.buttons.length; i++) {
-            if (this.buttons[i].getIcon() == this.white) {
+            if (this.spaces[i] == 0) {
                 this.buttons[i].setEnabled(enabled);
             }
         }
@@ -132,13 +144,10 @@ public class MainWindow extends JFrame {
                 this.buttons[space].setEnabled(false);
                 break;
         }
+        this.spaces[space] = colorId;
     }
 
     public void setTurnLabel(String text) {
         this.turnLabel.setText(text);
-    }
-    
-    public static void main(String[] args) {
-        new MainWindow();
     }
 }
