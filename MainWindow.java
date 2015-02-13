@@ -76,7 +76,7 @@ public class MainWindow extends JFrame {
         for (int i = 0; i < 9; i++) {
             final JButton btn = new JButton(this.white);
             btn.setRolloverIcon(this.grey);
-            btn.setPressedIcon(this.white);
+            btn.setPressedIcon(this.grey);
             btn.setDisabledIcon(this.white);
             btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btn.setBorder(null);
@@ -120,14 +120,14 @@ public class MainWindow extends JFrame {
     public void setSpaceColor(int space, int colorId) {
         switch (colorId) {
             case 0:
-                this.buttons[space].setIcon(this.white);
+                this.buttons[space].setDisabledIcon(this.white);
                 break;
             case 1:
-                this.buttons[space].setIcon(this.green);
+                this.buttons[space].setDisabledIcon(this.green);
                 this.buttons[space].setEnabled(false);
                 break;
             case 2:
-                this.buttons[space].setIcon(this.red);
+                this.buttons[space].setDisabledIcon(this.red);
                 this.buttons[space].setEnabled(false);
                 break;
         }
