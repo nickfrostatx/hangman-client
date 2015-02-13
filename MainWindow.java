@@ -92,16 +92,11 @@ public class MainWindow extends JFrame {
 
             btn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    Object source = evt.getSource();
-                    if (source instanceof JButton) {
-                        String cmd = evt.getActionCommand();
-
-                        try {
-                            int space = Integer.parseInt(cmd);
-                            game.move(space);
-                        } catch (NumberFormatException e) {}
-
-                    }
+                    String cmd = evt.getActionCommand();
+                    try {
+                        int space = Integer.parseInt(cmd);
+                        game.move(space);
+                    } catch (NumberFormatException e) {}
                 }
             });
         }
