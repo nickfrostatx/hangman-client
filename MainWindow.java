@@ -32,15 +32,18 @@ public class MainWindow extends JFrame {
 
         JPanel corePanel = new JPanel();
         corePanel.setLayout(new BorderLayout());
+        corePanel.setBackground(Color.WHITE);
 
         final JLabel turn = new JLabel("Your turn");
 
         JPanel northPanel = new JPanel();
+        northPanel.setBackground(Color.WHITE);
         northPanel.add(turn);
 
         corePanel.add(northPanel, BorderLayout.NORTH);
 
         JPanel boardPanel = new JPanel(new GridLayout(3, 3, 8, 8));
+        boardPanel.setBackground(Color.WHITE);
 
         final JButton[] buttons = new JButton[9];
 
