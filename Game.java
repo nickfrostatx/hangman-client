@@ -11,6 +11,5 @@ public class Game {
         this.spaces[space] = 1;
         this.window.setSpaceColor(space, 1);
         this.window.setInputEnabled(false);
-        System.out.println("Moved " + space);
     }
 }
