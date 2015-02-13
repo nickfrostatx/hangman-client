@@ -19,12 +19,13 @@ import javax.swing.SwingConstants;
 public class MainWindow extends JFrame {
     
     private ImageIcon white, grey, green, red;
-    private Game game;
     private JButton[] buttons;
     private JLabel turnLabel;
     private int[] spaces;
 
-    public MainWindow(Game game) {
+    public MainWindow(Game g) {
+
+        final Game game = g;
 
         this.spaces = new int[9];
 
