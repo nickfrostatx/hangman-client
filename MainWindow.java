@@ -20,6 +20,7 @@ public class MainWindow extends JFrame {
     
     private ImageIcon white, grey, green, red;
     private Game game;
+    private JButton[] buttons;
 
     public MainWindow() {
 
@@ -70,7 +71,7 @@ public class MainWindow extends JFrame {
         JPanel boardPanel = new JPanel(new GridLayout(3, 3, 8, 8));
         boardPanel.setBackground(Color.WHITE);
 
-        final JButton[] buttons = new JButton[9];
+        this.buttons = new JButton[9];
 
         for (int i = 0; i < 9; i++) {
             final JButton btn = new JButton(this.white);
@@ -79,8 +80,9 @@ public class MainWindow extends JFrame {
             btn.setDisabledIcon(this.white);
             btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btn.setBorder(null);
-            buttons[i] = btn;
             btn.setActionCommand(Integer.toString(i));
+
+            this.buttons[i] = btn;
 
             if (i == 3) {
                 btn.setEnabled(false);
