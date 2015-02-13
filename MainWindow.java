@@ -84,10 +84,6 @@ public class MainWindow extends JFrame {
 
             this.buttons[i] = btn;
 
-            if (i == 3) {
-                btn.setEnabled(false);
-            }
-
             boardPanel.add(btn);
 
             btn.addActionListener(new ActionListener() {
