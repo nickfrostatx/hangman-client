@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Insets;
@@ -76,6 +77,7 @@ public class MainWindow extends JFrame {
             btn.setRolloverIcon(this.grey);
             btn.setPressedIcon(this.white);
             btn.setDisabledIcon(this.white);
+            btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btn.setBorder(null);
             buttons[i] = btn;
             btn.setActionCommand(Integer.toString(i));
