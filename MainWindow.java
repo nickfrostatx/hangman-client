@@ -91,6 +91,7 @@ public class MainWindow extends JFrame {
             boardPanel.add(btn);
 
             btn.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent evt) {
                     String cmd = evt.getActionCommand();
                     try {
