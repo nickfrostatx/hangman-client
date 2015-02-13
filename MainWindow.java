@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -39,8 +40,31 @@ public class MainWindow extends JFrame {
         JPanel northPanel = new JPanel();
         northPanel.setBackground(Color.WHITE);
         northPanel.add(turn);
+        northPanel.add(Box.createVerticalStrut(40));
 
         corePanel.add(northPanel, BorderLayout.NORTH);
+
+        // Spacers
+
+        JPanel eastPanel = new JPanel();
+        eastPanel.setBackground(Color.WHITE);
+        eastPanel.add(Box.createHorizontalStrut(16));
+
+        corePanel.add(eastPanel, BorderLayout.EAST);
+
+        JPanel westPanel = new JPanel();
+        westPanel.setBackground(Color.WHITE);
+        westPanel.add(Box.createHorizontalStrut(16));
+
+        corePanel.add(westPanel, BorderLayout.WEST);
+
+        JPanel southPanel = new JPanel();
+        southPanel.setBackground(Color.WHITE);
+        southPanel.add(Box.createVerticalStrut(16));
+
+        corePanel.add(southPanel, BorderLayout.SOUTH);
+
+        // Board
 
         JPanel boardPanel = new JPanel(new GridLayout(3, 3, 8, 8));
         boardPanel.setBackground(Color.WHITE);
